@@ -1,37 +1,36 @@
 import { Locator, Page } from '@playwright/test';
-
 export class LoginPage {
-  readonly page: Page;
-  readonly usernameInput: Locator;
-  readonly passwordInput: Locator;
-  readonly loginButton: Locator;
-  readonly errorMessage: Locator;
-  readonly inventoryList: Locator;
-  constructor(page: Page) {
+readonly page: Page;
+readonly usernameInput: Locator;
+readonly passwordInput: Locator;
+readonly loginButton: Locator;
+readonly errorMessage: Locator;
+readonly inventoryList: Locator;
+constructor(page: Page) {
     this.page = page;
     this.usernameInput = page.locator('#user-name');
     this.passwordInput = page.locator('#password');
     this.loginButton = page.locator('#login-button');
     this.errorMessage = page.locator('[data-test="error"]');
     this.inventoryList = page.locator('.inventory_list');
-  }
-  async goto() {
-  await this.page.goto('https://www.saucedemo.com/');  }
-  async enterUsername(username: string) {
+}
+async goto() {
+await this.page.goto('https://www.saucedemo.com/');  }
+async enterUsername(username: string) {
     await this.usernameInput.fill(username);
-  }
-  async enterPassword(password: string) {
+}
+async enterPassword(password: string) {
     await this.passwordInput.fill(password);
-  }
-  async clickLogin() {
+}
+async clickLogin() {
     await this.loginButton.click();
-  }
-  async login(username: string, password: string) {
+}
+async login(username: string, password: string) {
     await this.enterUsername(username);
     await this.enterPassword(password);
     await this.clickLogin();
-  }
-  async getErrorMessage() {
+}
+async getErrorMessage() {
     return await this.errorMessage.textContent();
-  }
+}
 }
